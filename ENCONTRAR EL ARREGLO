@@ -1,0 +1,32 @@
+int[] arr = { 2, 5, 8, 12, 16, 23, 38, 56, 72, 91 };
+int target = 23;
+// Llamamos a la función de búsqueda binaria
+int result = BinarySearch(arr, target);
+// Mostramos el resultado
+if (result != -1)
+    Console.WriteLine($"El elemento {target} se encuentra en el índice {result} del arreglo.");
+else
+    Console.WriteLine($"El elemento {target} no se encuentra en el arreglo.");
+// Implementación de la búsqueda binaria
+static int BinarySearch(int[] arr, int target)
+{
+    int left = 0;
+    int right = arr.Length - 1;
+    while (left <= right)
+    {
+        int mid = left + (right - left) / 2;
+
+        // Si el elemento en el medio es el objetivo, devolvemos su índice
+        if (arr[mid] == target)
+            return mid;
+
+        // Si el objetivo es menor que el elemento en el medio, buscamos en la mitad izquierda
+        if (target < arr[mid])
+            right = mid - 1;
+        // Si el objetivo es mayor que el elemento en el medio, buscamos en la mitad derecha
+        else
+            left = mid + 1;
+    }
+    // Si el elemento no se encuentra en el arreglo, devolvemos -1
+    return -1;
+}
