@@ -1,0 +1,46 @@
+{
+    int num;
+    {
+        // Crear un arreglo de 10 elementos
+        int[] matriz = new int[10];
+
+        // Llenar el arreglo con valores capturados por el usuario
+        for (int i = 0; i < 10; i++)
+        {
+            Console.Write($"Ingresa el valor para la posición {i}: ");
+            matriz[i] = int.Parse(Console.ReadLine());
+        }
+
+        // Solicitar un número al usuario para buscarlo en el arreglo
+        Console.Write("Ingresa el número a buscar: ");
+        num = int.Parse(Console.ReadLine());
+
+        // Inicializar variables para almacenar las posiciones y la cantidad de veces que se encuentra el número
+        int contador = 0; int[] posiciones = new int[10];
+
+        // Buscar el número en el arreglo
+        for (int i = 0; i < 10; i++)
+        {
+            if (matriz[i] == num)
+            {
+                posiciones[contador] = i;
+                contador++;
+            }
+        }
+
+        // Mostrar el resultado de la búsqueda
+        if (contador == 0)
+        {
+            Console.WriteLine($"El número {num} no se encuentra en el arreglo.");
+        }
+        else
+        {
+            Console.WriteLine($"El número {num} se encuentra en las posiciones: ");
+            for (int i = 0; i < contador; i++)
+            {
+                Console.Write(posiciones[i] + " ");
+            }
+            Console.WriteLine($"\nEl número {num} se encuentra {contador} veces en el arreglo.");
+        }
+    }
+}
