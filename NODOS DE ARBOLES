@@ -1,0 +1,106 @@
+public class NodoArbol
+{
+    public int Valor { get; set; }
+    public NodoArbol Izquierdo { get; set; }
+    public NodoArbol Derecho { get; set; }
+
+    public NodoArbol(int valor)
+    {
+        Valor = valor;
+    }
+}
+
+public class ArbolBinario
+{
+    public NodoArbol Raiz { get; set; }
+
+    public void Insertar(int valor)
+    {
+        if (Raiz == null)
+        {
+            Raiz = new NodoArbol(valor);
+        }
+        else
+        {
+            InsertarRecursivo(Raiz, valor);
+        }
+    }
+
+    private void InsertarRecursivo(NodoArbol nodoActual, int valor)
+    {
+        if (valor < nodoActual.Valor)
+        {
+            if (nodoActual.Izquierdo == null)
+            {
+                nodoActual.Izquierdo = new NodoArbol(valor);
+            }
+            else
+            {
+                InsertarRecursivo(nodoActual.Izquierdo, valor);
+            }
+        }
+        else
+        {
+            if (nodoActual.Derecho == null)
+            {
+                nodoActual.Derecho = new NodoArbol(valor);
+            }
+            else
+            {
+                InsertarRecursivo(nodoActual.Derecho, valor);
+            }
+        }
+    }
+
+    public void RecorrerPreorden(NodoArbol nodoActual)
+    {
+        if (nodoActual != null)
+        {
+            Console.Write(nodoActual.Valor + " ");
+            RecorrerPreorden(nodoActual.Izquierdo);
+            RecorrerPreorden(nodoActual.Derecho);
+        }
+    }
+
+    public void RecorrerInorden(NodoArbol nodoActual)
+    {
+        if (nodoActual != null)
+        {
+            RecorrerInorden(nodoActual.Izquierdo);
+            Console.Write(nodoActual.Valor + " ");
+            RecorrerInorden(nodoActual.Derecho);
+        }
+    }
+
+    public void RecorrerPostorden(NodoArbol nodoActual)
+    {
+        if (nodoActual != null)
+        {
+            RecorrerPostorden(nodoActual.Izquierdo);
+            RecorrerPostorden(nodoActual.Derecho);
+            Console.Write(nodoActual.Valor + " ");
+        }
+    }
+}
+
+public class EjemploArbol
+{
+    public static void Main(string[] args)
+    {
+        var arbol = new ArbolBinario();
+        arbol.Insertar(1);
+        arbol.Insertar(8);
+        arbol.Insertar(5);
+        arbol.Insertar(7);
+        arbol.Insertar(2);
+
+        Console.WriteLine("Preorden:");
+        arbol.RecorrerPreorden(arbol.Raiz);
+
+        Console.WriteLine("\nInorden:");
+        arbol.RecorrerInorden(arbol.Raiz);
+
+        Console.WriteLine("\nPostorden:");
+        arbol.RecorrerPostorden(arbol.Raiz);
+    }
+}
