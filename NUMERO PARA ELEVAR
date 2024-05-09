@@ -1,0 +1,34 @@
+int num, exp, c = 0;
+String res;
+
+do
+{
+    Console.Write("\nEscriba el numero base a elevar: ");
+    num = int.Parse(Console.ReadLine());
+    Console.Write("Escriba el exponente: ");
+    exp = int.Parse(Console.ReadLine());
+    Console.WriteLine($"{num}^{exp}=" + Potencia(num, exp));
+    c++;
+    Console.Write("¿Desea repetir el proceso? ");
+    res = Console.ReadLine();
+} while (res == "si" || res == "s");
+
+if (c == 1)
+{
+    Console.WriteLine("El proceso se realizo una vez.");
+}
+else
+{
+    Console.WriteLine($"\nEL proceso se realizo {c} veces.");
+}
+
+
+int Potencia (int b, int e)
+{
+    int x = 1;
+    for (int cont = 0; cont < e; cont++)
+    {
+        x = x * b;
+    }
+    return x;
+}
