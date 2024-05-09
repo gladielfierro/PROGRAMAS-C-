@@ -1,0 +1,98 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("=======================================");
+        Console.WriteLine("           Multiplicación de Matrices");
+        Console.WriteLine("=======================================");
+
+        int[,] matriz1 = new int[4, 4];
+        int[,] matriz2 = new int[4, 4];
+
+        int currentRow = 6;
+        int currentCol = 0;
+
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("\nIngrese los elementos de la primera matriz:");
+        CapturarMatriz(matriz1, ref currentRow, ref currentCol);
+
+        currentRow += 7; // Ajuste de la fila para la segunda matriz
+        currentCol = 0;  // Reiniciar la columna para la segunda matriz
+
+        Console.ForegroundColor = ConsoleColor.Blue;
+        Console.WriteLine("\nIngrese los elementos de la segunda matriz:");
+        CapturarMatriz(matriz2, ref currentRow, ref currentCol);
+
+        // Limpiar la consola antes de mostrar el resultado
+        Console.Clear();
+
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("=======================================");
+        Console.WriteLine("           Resultado de la multiplicación");
+        Console.WriteLine("=======================================");
+
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("\nMatriz A:");
+        MostrarMatriz(matriz1, 7, 10);
+
+        Console.ForegroundColor = ConsoleColor.Blue;
+        Console.WriteLine("\nMatriz B:");
+        MostrarMatriz(matriz2, 15, 10); // Ajuste de la fila para la segunda matriz
+
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine("\nResultado:");
+        int[,] resultado = MultiplicarMatrices(matriz1, matriz2);
+        MostrarMatriz(resultado, 22, 10);
+
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.ReadKey(true);
+    }
+
+    static void CapturarMatriz(int[,] matriz, ref int currentRow, ref int currentCol)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                Console.SetCursorPosition(currentCol + j * 6, currentRow + i);
+
+                matriz[i, j] = int.Parse(Console.ReadLine());
+            }
+        }
+    }
+
+    static int[,] MultiplicarMatrices(int[,] matriz1, int[,] matriz2)
+    {
+        int[,] resultado = new int[4, 4];
+
+        for (int i = 0; i < 4; i++)
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                resultado[i, j] = 0;
+                for (int k = 0; k < 4; k++)
+                {
+                    resultado[i, j] += matriz1[i, k] * matriz2[k, j];
+                }
+            }
+        }
+
+        return resultado;
+    }
+
+    static void MostrarMatriz(int[,] matriz, int row, int col)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                Console.SetCursorPosition(col + j * 6, row + i);
+                Console.Write($"{matriz[i, j]} ");
+            }
+            Console.WriteLine();
+        }
+    }
+}
